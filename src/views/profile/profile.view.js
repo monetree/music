@@ -23,22 +23,7 @@ class Profile extends React.Component {
                         <ListedSongs title="Your Liked Songs" />
                     </div>
                     <div className="col-sm-4">
-                        <h5 style={{ color:'pink' }}>Update Content</h5>
-                        <div>
-                        <div class="form-group">
-                            <label style={{ color:'pink' }}>First Name:</label>
-                            <input type="text" class="form-control" style={{ background:'lightgrey', color:'#000', fontWeight:'bold' }} />
-                        </div>
-                        <div class="form-group">
-                            <label style={{ color:'pink' }}>User Name:</label>
-                            <input type="text" class="form-control" style={{ background:'lightgrey',color:'#000', fontWeight:'bold' }}/>
-                        </div>
-                        <div class="form-group">
-                            <label style={{ color:'pink' }}>Password:</label>
-                            <input type="text" class="form-control" style={{ background:'lightgrey', color:'#000', fontWeight:'bold' }}/>
-                        </div>
-                        <button type="submit" class="btn btn-default" style={{ background:'#e83e8c',color:'#fff' }}>Submit</button>
-                        </div>
+                        <ListedSongs title="Uploaded Contents" />
                     </div>
                     <div className="col-sm-4">
                         <br/><br/><br/><br/><br/>
