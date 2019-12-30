@@ -16,9 +16,9 @@ class Songs extends React.Component {
               {
                 this.props.title ? 
                 (
-                  <h5 style={{ color:'pink', textAlign:'center' }}>Liked Albums</h5>
+                  <h5 className="component-title-color" style={{ textAlign:'center' }}>Liked Albums</h5>
                 ):(
-                  <h1 style={{ color:'pink' }}>Songs</h1>
+                  <h1 className="component-title-color">Songs</h1>
                 )
               }
           

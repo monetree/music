@@ -20,7 +20,7 @@ class SecondHeader extends React.Component {
     render(){
       const { path } = this.state;
         return (
-            <div className="header-inner">
+            <div className={path === "/album" || path === "/profile" ? "header-inner no-blur-blue" : "header-inner"}>
             <div className="tim-container clearfix">
               <div id="site-logo" className="float-left">
                 <Link to="/">
@@ -39,7 +39,7 @@ class SecondHeader extends React.Component {
                   <div className="nav float-right">
                     <ul id="main-header-menu">
                       <li><a href="#">Upload</a></li>
-                      <li><input style={{ width:'400px',padding:'2px', border:'2px solid pink', color:'#fff', fontWeight:'bold' }} type="text" placeholder="Search here" required /></li>
+                      <li><input style={{ width:'400px',padding:'2px 5px 2px 5px', border:'2px solid #3C1A5B', color:'#fff', fontWeight:'bold' }} type="text" placeholder="Search here" required /></li>
                     </ul>
                   </div>
                 ):(

@@ -24,7 +24,7 @@ class RecentlyPlayed extends React.Component {
     render(){
         return (
             <div className="footer-blog-inner">
-            <h1 style={{ color:'pink', textAlign:'left' }}>Recently Played</h1>
+            <h1 className="component-title-color" style={{ textAlign:'left' }}>Recently Played</h1>
             <br/>
                 <div className="footer-blog">
                   <div className="widget-latest-post">

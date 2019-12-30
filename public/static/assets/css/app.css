@@ -781,7 +781,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header .top-header {
-  background: rgba(228, 58, 144, 0.65);
+  background: #3C1A5B;
 }
 
 .header.header-two .top-header {
@@ -1082,7 +1082,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header-inner {
-  background: rgba(228, 58, 144, 0.2);
+  background: rgba(140, 25, 245, 0.2);
 }
 
 #site-logo {

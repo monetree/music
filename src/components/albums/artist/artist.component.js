@@ -13,7 +13,7 @@ class Artist extends React.Component {
         return (
             <div className="tim-container d-flex justify-content-center">
             <div className="col-xl-12">
-              <h1 style={{ color:'pink' }}>Artist to follow</h1>
+              <h1 className="component-title-color">Artist to follow</h1>
               <div className="tim-isotope tim-isotope-1 wow fadeInUp" data-wow-delay="0.8s">
                 <ul className="tim-filter-items tim-album-items grid">
                   <li className="tim-album-item grid-item ui logo branding">

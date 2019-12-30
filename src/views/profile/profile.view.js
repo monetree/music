@@ -27,9 +27,9 @@ class Profile extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <br/><br/><br/><br/><br/>
-                    <h5 style={{ color:'pink' }}>Upload Album</h5>
-                    <h5 style={{ color:'pink' }}>Help</h5>
-                    <h5 style={{ color:'pink' }}>Contact Customer Support</h5>
+                    <h5 className="component-title-color">Upload Album</h5>
+                    <h5 className="component-title-color">Help</h5>
+                    <h5 className="component-title-color">Contact Customer Support</h5>
                     </div>
                 </div>
 

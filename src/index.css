@@ -64,6 +64,14 @@ code {
   display: none;
 }
 
+.no-blur-blue{
+  background: rgb(86, 37, 133) !important;
+}
+
+.component-title-color{
+  color:#3C1A5B;
+}
+
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
@@ -157,7 +165,7 @@ h1 {
 .main-agileinfo {
   width: 35%;
   margin: 3em auto;
-  background: rgba(0, 0, 0, 0.18);
+  background: rgba(10, 5, 145, 0.1);
   background-size: cover;
 }
 .agileits-top {
