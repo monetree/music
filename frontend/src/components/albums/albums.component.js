@@ -21,7 +21,7 @@ class Albums extends React.Component {
               <section id="album">
                 <Artist />
                 <Genre />
-                <Songs />
+                <Songs playSong={this.props.playSong}/>
               </section>  
                 
             </div>

@@ -5,8 +5,10 @@ const SignUp = React.lazy(() => import('views/signup/signup.view'));
 const SignIn = React.lazy(() => import('views/signin/signin.view'));
 const Album = React.lazy(() => import('views/album/album.view'));
 const Profile = React.lazy(() => import('views/profile/profile.view'));
+const Upload = React.lazy(() => import('views/upload/upload.view'));
 
 var indexRoutes = [
+    { path: "/upload", name: "Upload", component: Upload },
     { path: "/profile", name: "Profile", component: Profile },
     { path: "/album", name: "Album", component: Album },
     { path: "/register", name: "SignUp", component: SignUp },

@@ -5,7 +5,8 @@ class Player extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-          playing: false
+          playing: false,
+          song: null
         }
     }
 
@@ -21,6 +22,28 @@ class Player extends React.Component {
       this.setState({
         playing:!this.state.playing
       })
+    }
+
+    playSong = (music) => {
+      this.setState({
+        song: music
+      }, () => this.addMusicToPlayer())
+    }
+
+    addMusicToPlayer = () => {
+      let audio = document.getElementById("playing_id"); 
+      let playing = this.state.playing
+      if(!playing){
+        audio.play(); 
+        this.setState({
+          playing: true
+        })
+      } else {
+        this.setState({
+          playing: false
+        })
+        audio.pause(); 
+      }
     }
 
     render(){
@@ -47,10 +70,19 @@ class Player extends React.Component {
                     <div className="jp-gui jp-interface">
                       <div className="jp-controls">
                         <button className="jp-previous" tabIndex={0}><i className="fa fa-backward" /></button>
-                        <button className="jp-play" tabIndex={0}><i className={playing ? "fa fa-pause" : "fa fa-play" } onClick={() => this.handlePlayer("audio")} />
-                          <audio id="audio" style={{ display:'none' }}>
-                            <source src="static/media/audio/beach.mp3" type="audio/mp3" />
-                          </audio>
+                        <button className="jp-play" tabIndex={0}><i className={playing ? "fa fa-pause" : "fa fa-play" } onClick={() => this.handlePlayer(this.state.song ? "playing_id" : "audio")} />
+                          {
+                            this.state.song ? 
+                            (
+                              <audio id="playing_id" style={{ display:'none' }}>
+                                <source src={"http://127.0.1:5000/"+ this.state.song} type="audio/mp3" />
+                              </audio>
+                            ):(
+                              <audio id="audio" style={{ display:'none' }}>
+                                <source src="static/media/audio/beach.mp3" type="audio/mp3" />
+                              </audio>
+                            )
+                          }
                         </button>
                         <button className="jp-next" tabIndex={0}><i className="fa fa-forward" /></button>
                       </div>

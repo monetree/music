@@ -10,6 +10,7 @@ class Album extends React.Component {
         this.state = {
 
         }
+        this.player = React.createRef()
     }
 
     componentDidMount(){
@@ -19,13 +20,17 @@ class Album extends React.Component {
       }
     }
 
+    playSong = (music) => {
+      this.player.current.playSong(music)
+    }
+
     render(){
         return (
           <div id="site">
             <MainHeader />
             <br/><br/>
-            <Albums />
-            <Player />
+            <Albums playSong={this.playSong} />
+            <Player ref={this.player} />
           </div> 
         )
     }

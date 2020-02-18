@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import FormatUrl from "utils/UrlFormatter";
+import { ToastsContainer, ToastsStore } from 'react-toasts';
 
 class SecondHeader extends React.Component {
     constructor(props){
@@ -15,6 +17,29 @@ class SecondHeader extends React.Component {
       path:window.location.pathname
     })
   }
+
+  uploadFile = (event) => {
+    let formData = new FormData();
+    formData.append('file-to-upload', event.target.files[0]);
+    let url = FormatUrl(`/upload`)
+    fetch(url, {
+        method: 'post',
+        headers: {
+            Accept: 'application/json, text/plain, */*'
+          },
+          body:formData,
+      })
+      .then(response => response.json())
+      .then(res => {
+          if(res){
+            ToastsStore.success("upload successful", 3000, "toast-box-pink")
+          } else {
+            ToastsStore.error("upload failed", 3000, "toast-box-pink")
+          }
+      }).catch(err => {
+        ToastsStore.error("Internal server error", 3000, "toast-box-pink")
+      })
+}
 
 
     render(){
@@ -43,10 +68,13 @@ class SecondHeader extends React.Component {
                   <div className="nav float-right">
                     <ul id="main-header-menu">
                    
-                      <li> <a href="#" className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                      
-                      Upload Content
-                    </a></li>
+                      <li> 
+                        <Link to="/upload">
+                      <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                          Upload Content
+                      </label>
+                      </Link>
+                    </li>
                       <li><input style={{ width:'400px',padding:'2px 5px 2px 5px', border:'2px solid #D68910', color:'#fff', fontWeight:'bold' }} type="text" placeholder="Search Artist, Song, Album..." required /></li>
                     </ul>
                   </div>
@@ -109,7 +137,7 @@ class SecondHeader extends React.Component {
 
               {/* /.nav */}
             </div>
-            {/* /.tim-container */}
+            <ToastsContainer store={ToastsStore} />
           </div>
         )
     }
