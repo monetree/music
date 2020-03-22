@@ -8,7 +8,8 @@ class Player extends React.Component {
         this.state = {
           playing: false,
           song: null,
-          history:null
+          history:null,
+          title:null
         }
     }
 
@@ -37,9 +38,11 @@ class Player extends React.Component {
 
     }
 
-    playSong = (music) => {
+    playSong = (song) => {
       this.setState({
-        song: music
+        song: song.music,
+        title: song.title,
+        thumbnail: song.thumbnail
       }, () => this.addMusicToPlayer())
     }
 
@@ -68,11 +71,11 @@ class Player extends React.Component {
               <div className="player-container">
                 <div className="current-tracks">
                   <div id="main_player" className="jp-jplayer">
-                    <img src="static/media/album/1.jpg" alt="album thumb" />
+                    <img src={this.state.thumbnail ? "http://127.0.0.1:5000/"+this.state.thumbnail: "static/media/album/1.jpg" } alt="album thumb" />
                   </div>
                   <div id="nowPlaying">
-                    <h3 className="track-name">Starboy</h3>
-                    <span className="artist-name">The Weeknd</span>
+        <h3 className="track-name">{this.state.title ? this.state.title : "No songs playing"}</h3>
+                    {/* <span className="artist-name">The Weeknd</span> */}
                   </div>
                   {/* #nowPlaying */}
                 </div>

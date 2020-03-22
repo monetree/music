@@ -193,7 +193,7 @@ class Songs extends React.Component {
                         <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
                         <h4 className="album-title">{song.title}</h4>
                         {/* <h5 className="artist-name">Song Artist Name</h5> */}
-                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.playSong(song.music)}>Play Now</span>
+                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.playSong(song)}>Play Now</span>
                         <br/>
 
                         <Popup

@@ -1,8 +1,8 @@
 import React from 'react';
 import MainHeader from '../../components/main-header/main-header.component';
 import ListedSongs from '../../components/albums/listed-songs/listed-songs.component';
-import Songs from '../../components/albums/songs/songs.component'
 import Albums from '../../components/albums/albums.component';
+import Player from 'components/player/player.component';
 
 
 class Profile extends React.Component {
@@ -11,6 +11,7 @@ class Profile extends React.Component {
         this.state = {
 
         }
+        this.player = React.createRef()
     }
 
     componentDidMount(){
@@ -18,6 +19,11 @@ class Profile extends React.Component {
         if(!login_id){
           this.props.history.push("/login")
         }
+      }
+
+
+      playSong = (song) => {
+        this.player.current.playSong(song)
       }
 
     render(){
@@ -47,11 +53,12 @@ class Profile extends React.Component {
                     </div>
                     <div className="col-sm-4">
                         <br/><br/><br/><br/>
-                        <ListedSongs title="Recomended songs" />
+                        <ListedSongs playSong={this.playSong} title="Recomended songs" />
                         {/* <ListedSongs title="Recomended artists" /> */}
                     </div>
                 </div>
             </div>
+                <Player ref={this.player} />
             </div> 
         )
     }

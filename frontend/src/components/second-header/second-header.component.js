@@ -7,12 +7,15 @@ class SecondHeader extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        path:null
+        path:null,
+        search: null
       }
   }
 
   handleSearch = (ev) => {
-    
+    this.setState({
+      search: ev.target.value
+    })
   }
 
 
@@ -45,6 +48,12 @@ class SecondHeader extends React.Component {
       })
 }
 
+  handleSubmit = (ev) => {
+    ev.preventDefault()
+    let search = this.state.search
+    // alert(search)
+    window.location = `/songs?search=${search}`
+  }
 
     render(){
       const { path } = this.state;
@@ -97,54 +106,37 @@ class SecondHeader extends React.Component {
                     </li>
 
                       <li>
+                        <form onSubmit={this.handleSubmit}>
                         <input className="store-btn ml__15" onChange={this.handleSearch} type="text" placeholder="Search Artist, Song, Album..." required />
+                        </form>
                       </li>
                     </ul>
                   </div>
                 ):(
                   <div className="nav float-right">
                   <ul id="main-header-menu">
-                    <li className="menu-item-has-children active">
-                      <a href="index-2.html">Home</a>
+                    <li className="menu-item-has-children">
+                      <Link to="/">Home</Link>
                       <ul className="sub-menu">
-                        <li><a href="index-2.html">Music Player </a></li>
-                   
+                       
                        
                       </ul>
                     </li>
                     <li className="menu-item-has-children">
-                      <a href="artist.html">Aritist</a>
-                      <ul className="sub-menu">
-                        
-                        <li><a href="artist-single.html">Artist Details</a></li>
-                      </ul>
+                      <Link to="/songs">Songs</Link>
+                   
                     </li>
                     <li className="menu-item-has-children">
-                      <a href="album.html">Album</a>
-                      <ul className="sub-menu">
-                        
-                        <li><a href="album-single.html">Album Details</a></li>
-                      </ul>
+                      <Link to="/album">Album</Link>
+                    
                     </li>
                     <li className="menu-item-has-children">
-                      <a href="event.html">Events</a>
-                      <ul className="sub-menu">
-                        <li><a href="contact.html">Contact</a></li>
-                      </ul>
+                      <Link t0="/profile">Profile</Link>
+                 
                     </li>
                     <li className="menu-item-has-children">
-                      <a href="tabs.html">Tabs</a>
-                      <ul className="sub-menu">
-                        
-                        <li><a href="tabs-single.html">Tabs Details</a></li>
-                      </ul>
-                    </li>
-                    <li className="menu-item-has-children">
-                      <a href="tabs.html">About Us</a>
-                      <ul className="sub-menu">
-                        <li><a href="tabs.html">Tabs</a></li>
-                        <li><a href="tabs-single.html">Tabs Details</a></li>
-                      </ul>
+                      <a>About Us</a>
+                  
                     </li>
                    
                     <li className="menu-item-has-children">

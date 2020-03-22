@@ -93,7 +93,7 @@ handleSongs = () => {
                 this.state.songs.map((song, index) => (
                   <div key={index} className="footer-blog">
                   <div className="widget-latest-post">
-                    <a href="#" className="fea-image" id="l1" onMouseLeave={() => this.hideListedSong("l1")} onMouseOver={() => this.handleListedSong("l1")}>
+                    <a onClick={() => this.props.playSong(song)} className="fea-image" id="l1" onMouseLeave={() => this.hideListedSong("l1")} onMouseOver={() => this.handleListedSong("l1")}>
                       <img src={"http://127.0.0.1:5000/"+ song.thumbnail} alt="Thumb" className="br5"  />
                       <div className="play-icon display-none"><i class="fa fa-play" aria-hidden="true"></i></div>
                     </a>

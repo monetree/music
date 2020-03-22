@@ -4,6 +4,7 @@ import MainHeader from '../../components/main-header/main-header.component';
 import FormatUrl from "utils/UrlFormatter";
 import { ToastsContainer, ToastsStore } from 'react-toasts';
 import Popup from "reactjs-popup";
+import Player from '../../components/player/player.component';
 
 
 class Songs extends React.Component {
@@ -15,6 +16,7 @@ class Songs extends React.Component {
       likes:[],
       music_ids: []
     }
+    this.player = React.createRef()
 }
 
 getSongs = () => {
@@ -50,6 +52,9 @@ getParameterByName(name, url) {
 componentDidMount(){
   let name = this.getParameterByName('name');
   let id = this.getParameterByName('id');
+  let search = this.getParameterByName("search");
+
+
   if(name === "artist"){
     let url = FormatUrl(`/music`)
     fetch(url)
@@ -81,6 +86,25 @@ componentDidMount(){
       this.setState({
         music_ids: music_ids
       }, () => this.getSongs())
+    })
+  } else if(search){
+    let url = FormatUrl(`/music`)
+    fetch(url)
+    .then(res => res.json())
+    .then(res => {
+
+      let newsongs = []
+      if(search){
+        newsongs = res.filter(song => {
+          return song.title.toLowerCase().includes(search.toLowerCase());
+        })
+      }
+
+      
+
+      this.setState({
+        songs: newsongs
+      }, () => this.getLikes())
     })
   } else {
     let url = FormatUrl(`/music`)
@@ -205,6 +229,8 @@ handleSongs = () => {
 }
   
     render(){
+      const { songs } = this.state;
+
         return (
             <div id="site">
 
@@ -221,7 +247,7 @@ handleSongs = () => {
             <div className="tim-isotope tim-isotope-1 wow fadeInUp" data-wow-delay="0.8s">
                 <ul className="tim-filter-items tim-album-items grid">
                 {
-                  this.state.songs.map((song, index) => (
+                  songs.map((song, index) => (
                     <li key={index} className="tim-album-item grid-item ui logo branding">
                     <div className="tim-isotope-grid__img effect-active">
                       <img src={"http://127.0.0.1:5000/"+song.thumbnail} style={{ height:"250px" }} alt="album thumb" />
@@ -231,7 +257,7 @@ handleSongs = () => {
                         <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
                         <h4 className="album-title">{song.title}</h4>
                         {/* <h5 className="artist-name">Song Artist Name</h5> */}
-                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.props.playSong(song.music)}>Play Now</span>
+                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.player.current.playSong(song)}>Play Now</span>
                         <br/>
 
                         <Popup
@@ -288,6 +314,7 @@ handleSongs = () => {
               </div>
 
 
+              <Player ref={this.player} />
                 <ToastsContainer store={ToastsStore} />
             </div>
         )
