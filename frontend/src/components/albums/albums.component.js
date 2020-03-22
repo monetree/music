@@ -17,7 +17,7 @@ class Albums extends React.Component {
     render(){
         return (
             <div className="row">
-            <div className="col-sm-8">
+            <div className="col-sm-12">
               <section id="album">
                 <Artist />
                 <Genre />
@@ -25,13 +25,13 @@ class Albums extends React.Component {
               </section>  
                 
             </div>
-            <div className="col-sm-4">
+            {/* <div className="col-sm-4">
             <section id="album">
                 <RecentlyPlayed />
                 <ListedSongs />
               </section>
               
-            </div>
+            </div> */}
           </div>
         )
     }

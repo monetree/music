@@ -698,3 +698,31 @@ input.checkbox:checked:after {
     padding: 1em 0 0;
  }
 }
+
+
+.fa:hover{
+  color: rgb(235, 142, 157);
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.popup-content  {
+  background: #160244 !important;
+  border: 2px solid #160244 !important;
+  border-radius: 10px !important;
+}
+
+.popupContainer{
+  background: #160244 !important;
+}
+
+
+.active-color {
+  color: rgb(219, 99, 119);
+}
+
+.active-background {
+  background: rgb(219, 99, 119) !important;
+}

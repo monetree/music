@@ -1,73 +1,139 @@
 import React from 'react';
+import FormatUrl from "utils/UrlFormatter";
+import { ToastsContainer, ToastsStore } from 'react-toasts';
+import { Link } from "react-router-dom";
 
 
 class Artist extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-
+          artists:[]
         }
     }
+
+
+    componentDidMount(){
+      let url = FormatUrl(`/artist`)
+      fetch(url)
+      .then(res => res.json())
+      .then(res => {
+          this.setState({
+              artists: res
+          }, () => this.followedArtist())
+      }).catch(err => {
+          this.setState({
+              artists: []
+          })
+      })
+
+      
+  }
+
+
+  followArtist = (artist_id) => {
+    let url = FormatUrl('/followedartists')
+    fetch(url, {
+        method: 'post',
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          artist_id: artist_id,
+          user_id:localStorage.getItem("login_id")
+        })
+        })
+    .then(res => res.json())
+    .then(res => {
+       if(res.code === 200){
+         this.componentDidMount()
+        ToastsStore.success("success", 3000, "toast-box-pink")
+       } else {
+        ToastsStore.error("failed", 3000, "toast-box-pink")
+       }
+    }).catch(err => {
+        ToastsStore.error("failed", 3000, "toast-box-pink")
+    })
+  }
+
+  followedArtist = () => {
+    let user_id = localStorage.getItem("login_id")
+    let url = FormatUrl('/followedartists')
+    fetch(url)
+    .then(res => res.json())
+    .then(res => {
+      let followed_artists = []
+      for(let i of res){
+        if (i.user_id === parseInt(user_id)){
+          followed_artists.push(i)
+        }
+      }
+      let new_artist = []
+      if(window.location.pathname === "/profile"){
+        
+        let artists = this.state.artists;
+        for(let i of artists){
+          for(let j of followed_artists){
+            if(i.id === j.artist_id){
+              i["follwed"] = true
+              new_artist.push(i)
+            }
+          }
+        }
+  
+        this.setState({
+          artists: new_artist
+        })
+      } else {
+        let artists = this.state.artists;
+        for(let i of artists){
+          for(let j of followed_artists){
+            if(i.id === j.artist_id){
+              i["follwed"] = true
+            }
+          }
+        }
+  
+        this.setState({
+          artists: artists
+        })
+      }
+ 
+
+
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
     render(){
         return (
             <div className="tim-container d-flex justify-content-center">
             <div className="col-xl-12">
-              <h1 className="component-title-color" >Artists to follow</h1>
+              <h1 className="component-title-color" >{window.location.pathname === "/profile" ? "Follwed artists" : "Artists to follow" }</h1>
               <div className="tim-isotope tim-isotope-1 wow fadeInUp" data-wow-delay="0.8s">
                 <ul className="tim-filter-items tim-album-items grid">
-                  <li className="tim-album-item grid-item ui logo branding">
-                    <div className="tim-isotope-grid__img effect-active">
-                      <img src="static/media/album/1.jpg" alt="album thumb" />
-                    </div>
-                    <div className="album_details_wrap">
-                      <div className="album-info">
-                        <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
-                        <h4 className="album-title">Starboy</h4>
-                        <h5 className="artist-name">The Weeknd</h5>
-                        <a href="#" className="tim-btn tim-btn-bgt">Play </a>
+                  {
+                    this.state.artists.map((artist, index) => (
+                      <li key={index} className="tim-album-item grid-item ui logo branding">
+                      <div className="tim-isotope-grid__img effect-active">
+                        <img src={"http://localhost:5000/"+artist.photo} style={{ height:"200px" }} alt="album thumb" />
                       </div>
-                    </div>
-                  </li>
-                  <li className="tim-album-item grid-item ui design">
-                    <div className="tim-isotope-grid__img">
-                      <img src="static/media/album/2.jpg" alt="album thumb" />
-                    </div>
-                    <div className="album_details_wrap">
-                      <div className="album-info">
-                        <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
-                        <h4 className="album-title">A head full of Dreams</h4>
-                        <h5 className="artist-name">Coldplay</h5>
-                        <a href="#" className="tim-btn tim-btn-bgt">Play </a>
+                      <div className="album_details_wrap">
+                        <div className="album-info">
+                          <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
+                        
+                    <h5 className="artist-name">{artist.name}</h5>
+                          <Link to={`/songs?id=${artist.id}&name=artist`} className="tim-btn tim-btn-bgt pointer">Songs</Link><br/>
+                          <a onClick={artist.follwed ? "" : () => this.followArtist(artist.id)} className={artist.follwed ? "tim-btn tim-btn-bgt active-background" : "tim-btn tim-btn-bgt pointer" }>{artist.follwed ? "Followed" : "Follow"}</a>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                  <li className="tim-album-item grid-item logo">
-                    <div className="tim-isotope-grid__img">
-                      <img src="static/media/album/3.jpg" alt="album thumb" />
-                    </div>
-                    <div className="album_details_wrap">
-                      <div className="album-info">
-                        <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
-                        <h4 className="album-title">Recovery</h4>
-                        <h5 className="artist-name">Eminem</h5>
-                        <a href="#" className="tim-btn tim-btn-bgt">Play </a>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="tim-album-item grid-item design ui">
-                    <div className="tim-isotope-grid__img">
-                      <img src="static/media/album/4.jpg" alt="album thumb" />
-                    </div>
-                    <div className="album_details_wrap">
-                      <div className="album-info">
-                        <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
-                        <h4 className="album-title">Thank u, next</h4>
-                        <h5 className="artist-name">Ariana Grande</h5>
-                        <a href="#" className="tim-btn tim-btn-bgt">Play </a>
-                      </div>
-                    </div>
-                  </li>
+                    </li>
+                   
+                    ))
+                  }
+                 
                 </ul>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactAudioPlayer from 'react-audio-player';
 
 
 class Player extends React.Component {
@@ -6,7 +7,8 @@ class Player extends React.Component {
         super(props);
         this.state = {
           playing: false,
-          song: null
+          song: null,
+          history:null
         }
     }
 
@@ -15,13 +17,24 @@ class Player extends React.Component {
       let audio = document.getElementById(id); 
       let playing = this.state.playing
       if(!playing){
-        audio.play(); 
+        // audio.play(); 
+        this.setState({
+          song: this.state.history,
+          playing: true
+        })
       } else {
-        audio.pause(); 
+        this.setState({
+          history: this.state.song,
+          song: null,
+        })
+        // audio.pause(); 
       }
-      this.setState({
-        playing:!this.state.playing
-      })
+      if(this.state.song){
+          this.setState({
+          playing:!this.state.playing
+        })
+      }
+
     }
 
     playSong = (music) => {
@@ -31,19 +44,19 @@ class Player extends React.Component {
     }
 
     addMusicToPlayer = () => {
-      let audio = document.getElementById("playing_id"); 
-      let playing = this.state.playing
-      if(!playing){
-        audio.play(); 
+      // let audio = document.getElementById("playing_id"); 
+      // let playing = this.state.playing
+      // if(!playing){
+      //   audio.play(); 
         this.setState({
           playing: true
         })
-      } else {
-        this.setState({
-          playing: false
-        })
-        audio.pause(); 
-      }
+      // } else {
+      //   this.setState({
+      //     playing: false
+      //   })
+      //   audio.pause(); 
+      // }
     }
 
     render(){
@@ -70,20 +83,31 @@ class Player extends React.Component {
                     <div className="jp-gui jp-interface">
                       <div className="jp-controls">
                         <button className="jp-previous" tabIndex={0}><i className="fa fa-backward" /></button>
+                    
                         <button className="jp-play" tabIndex={0}><i className={playing ? "fa fa-pause" : "fa fa-play" } onClick={() => this.handlePlayer(this.state.song ? "playing_id" : "audio")} />
-                          {
+                          {/* {
                             this.state.song ? 
                             (
-                              <audio id="playing_id" style={{ display:'none' }}>
-                                <source src={"http://127.0.1:5000/"+ this.state.song} type="audio/mp3" />
+                              <audio id="playing_id">
+                                <source src={"http://127.0.0.1:5000/"+ this.state.song} type="audio/mp3" />
                               </audio>
                             ):(
                               <audio id="audio" style={{ display:'none' }}>
                                 <source src="static/media/audio/beach.mp3" type="audio/mp3" />
                               </audio>
                             )
-                          }
+                          } */}
                         </button>
+
+                        <span style={{ display:'none' }}>
+                        <ReactAudioPlayer
+                          src={"http://127.0.0.1:5000/"+ this.state.song}
+                          autoPlay
+                          controls
+                        />
+                        </span>
+
+
                         <button className="jp-next" tabIndex={0}><i className="fa fa-forward" /></button>
                       </div>
                       {/* Display the track inside player */}
@@ -120,3 +144,5 @@ class Player extends React.Component {
 
 
 export default Player;
+
+

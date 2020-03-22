@@ -1,6 +1,6 @@
  
 const uploadMusic = (req, res, db) => {
-  const { title, thumbnail, music } = req.body;
+  const { title, thumbnail, music, user_id, artist_id } = req.body;
   if (!title || !thumbnail || !music) {
     return res.status(400).json('incorrect form submission');
   }
@@ -9,6 +9,8 @@ const uploadMusic = (req, res, db) => {
         title:title,
         thumbnail: thumbnail,
         music: music,
+        user_id: user_id,
+        artist_id: artist_id
       })
       .into('musics')
       .then(music => {
@@ -26,7 +28,7 @@ const retriveMusic = (req, res, db) => {
     .then(data => {
       return res.json(data)
     })
-    .catch(err => res.status(400).json('unable to upload'))
+    .catch(err => res.status(400).json('unable to fetch'))
   }
   
   module.exports = {

@@ -11,6 +11,10 @@ class SecondHeader extends React.Component {
       }
   }
 
+  handleSearch = (ev) => {
+    
+  }
+
 
   componentDidMount(){
     this.setState({
@@ -69,13 +73,32 @@ class SecondHeader extends React.Component {
                     <ul id="main-header-menu">
                    
                       <li> 
-                        <Link to="/upload">
+                        <Link to="/music-upload">
                       <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                          Upload Content
+                          Upload music
                       </label>
                       </Link>
                     </li>
-                      <li><input style={{ width:'400px',padding:'2px 5px 2px 5px', border:'2px solid #D68910', color:'#fff', fontWeight:'bold' }} type="text" placeholder="Search Artist, Song, Album..." required /></li>
+
+                    <li> 
+                        <Link to="/artist-upload">
+                      <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                          Upload artist
+                      </label>
+                      </Link>
+                    </li>
+
+                    <li> 
+                        <Link to="/playlist-upload">
+                      <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                          Create Playlist
+                      </label>
+                      </Link>
+                    </li>
+
+                      <li>
+                        <input className="store-btn ml__15" onChange={this.handleSearch} type="text" placeholder="Search Artist, Song, Album..." required />
+                      </li>
                     </ul>
                   </div>
                 ):(
@@ -136,6 +159,7 @@ class SecondHeader extends React.Component {
 
 
               {/* /.nav */}
+     
             </div>
             <ToastsContainer store={ToastsStore} />
           </div>

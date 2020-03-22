@@ -28,7 +28,7 @@ class Album extends React.Component {
         return (
           <div id="site">
             <MainHeader />
-            <br/><br/>
+            <br/><br/><br/><br/>
             <Albums playSong={this.playSong} />
             <Player ref={this.player} />
           </div> 
