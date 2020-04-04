@@ -53,20 +53,14 @@ class FirstHeader extends React.Component {
             <ul className="user-login float-left">
                 <li><Link to="/">Home</Link></li>
               </ul>
-              {/* <ul className="site-social-link">
-                <li><a href="#"><i className="fa fa-facebook" /></a></li>
-                <li><a href="#"><i className="fa fa-twitter" /></a></li>
-                <li><a href="#"><i className="fa fa-google-plus" /></a></li>
-                <li><a href="#"><i className="fa fa-pinterest-p" /></a></li>
-                <li><a href="#"><i className="fa fa-instagram" /></a></li>
-              </ul> */}
-              {/* /.site-social-link */}
               {
                 logged_in ? (
                   <ul className="user-login float-right">
+                    <li><a style={{ color:'#fff' }}>Loggedin as {localStorage.getItem("login_username")}</a></li>
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/album">Album</Link></li>
                     <li><Link onClick={this.handleLogout}>Logout</Link></li>
+                    
                   </ul>
                 ) : (
                   <ul className="user-login float-right">

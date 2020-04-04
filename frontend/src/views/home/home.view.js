@@ -31,12 +31,10 @@ class Home extends React.Component {
                     <p data-animate="fadeInUp" data-delay="0.9s">
                     Find us on
                     </p>
-                    <a href="#" className="store-btn" data-animate="fadeInLeft" data-delay="0.9s">
-                     
+                    <a href="https://www.facebook.com/usamaahmed1997" target="_blank" className="store-btn" data-animate="fadeInLeft" data-delay="0.9s">
                       Facebook
                     </a>
-                    <a href="#" className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                      
+                    <a href="https://www.instagram.com/usamaahmed97" target="_blank" className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
                       Instagram
                     </a>
                   </div>

@@ -38,7 +38,7 @@ class ArtistUpload extends React.Component {
 
 
     uploadArtist = () => {
-        let name = this.state.name;
+        let name = localStorage.getItem("login_username")
         let photo = this.state.photo;
         let user_id = localStorage.getItem("login_id");
         let url = FormatUrl(`/artist`)
@@ -59,6 +59,7 @@ class ArtistUpload extends React.Component {
         .then(res => {
            if(res.code === 200){
             ToastsStore.success("success", 3000, "toast-box-pink")
+            window.location = "/album"
            } else {
             ToastsStore.error("failed", 3000, "toast-box-pink")
            }
@@ -73,15 +74,15 @@ class ArtistUpload extends React.Component {
             <div id="site">
              <MainHeader />
                 <div className="main-w3layouts wrapper" style={{ backgroundImage:`url("https://themeim.com/demo/milando/media/banner/6.jpg")` }}>
-                    <br/><br/><br/><br/>
-                    <h1>Create Artist</h1>
+                    <br/><br/><br/><br/><br/>
+                    <h1>Create Profile</h1>
                     <div className="main-agileinfo">
                     <div className="agileits-top">
-                        <input className="text" id="firstname" type="text" onChange={(e) => this.setState({name: e.target.value})} placeholder="Music title" required />
-                        <br/>
+
+                 
                         <label className="store-btn ml__15" style={{ width:'88%' }} data-animate="fadeInRight" data-delay="0.9s">
-                            <input style={{ display:'none' }} type="file" onChange={this.uploadPhoto} />
-                            Artist photo
+                            <input style={{ display:'none' }} type="file" onChange={this.uploadPhoto} accept="image/*" />
+                            Profile photo
                         </label>
    
 
@@ -94,9 +95,12 @@ class ArtistUpload extends React.Component {
                             </div>
                         </div>
                         <p style={{ visibility:'hidden' }}>Have an Account? <Link to="/login"> Login Now!</Link></p>
+                        <p style={{ visibility:'hidden' }}>Have an Account? <Link to="/login"> Login Now!</Link></p>
+                        <p style={{ visibility:'hidden' }}>Have an Account? <Link to="/login"> Login Now!</Link></p>
                     </div>
                     </div>
                 </div>
+                
                 <ToastsContainer store={ToastsStore} />
             </div>
         )

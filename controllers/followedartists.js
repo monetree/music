@@ -26,11 +26,25 @@ const uploadFollowedartists = (req, res, db) => {
         return res.json(data)
       })
       .catch(err => res.status(400).json('unable to featch'))
-    }
+  }
+
+
+  const unfollowArtists = (req, res, db) => {
+    db('followedartists')
+    .where('artist_id', req.query.artist_id)
+    .del()
+    .then(data => {
+      return res.json({"code":200})
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
     
     module.exports = {
         uploadFollowedartists: uploadFollowedartists,
-        retriveFollowedartists: retriveFollowedartists
+        retriveFollowedartists: retriveFollowedartists,
+        unfollowArtists: unfollowArtists
     }
   
   

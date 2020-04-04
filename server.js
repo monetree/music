@@ -116,6 +116,7 @@ app.post('/myplaylist', (req, res) => { myplaylist.uploadMyplaylist(req, res, db
 app.get('/myplaylist', (req, res) => { myplaylist.retriveMyplaylist(req, res, db ) })
 app.post('/followedartists', (req, res) => { followedartists.uploadFollowedartists(req, res, db ) })
 app.get('/followedartists', (req, res) => { followedartists.retriveFollowedartists(req, res, db ) })
+app.delete('/followedartists', (req, res) => { followedartists.unfollowArtists(req, res, db ) })
 
 
 

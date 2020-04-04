@@ -13,7 +13,6 @@ class MusicUpload extends React.Component {
             title: null,
             thumbnail: null,
             audio: null,
-            artists: [],
             artist_id: null
         }
     }
@@ -36,6 +35,8 @@ class MusicUpload extends React.Component {
                     thumbnail: res.path
                 })
             }
+          }).catch(err => {
+            console.log(err)
           })
     }
 
@@ -58,6 +59,8 @@ class MusicUpload extends React.Component {
                       audio: res.path
                   })
               }
+          }).catch(err => {
+              console.log(err)
           })
     }
 
@@ -68,6 +71,7 @@ class MusicUpload extends React.Component {
         let user_id = localStorage.getItem("login_id")
         let artist_id = this.state.artist_id;
         let url = FormatUrl(`/music`)
+
 
         if(!artist_id){
             ToastsStore.warning("choose artist", 3000, "toast-box-pink")
@@ -107,13 +111,14 @@ class MusicUpload extends React.Component {
         .then(res => res.json())
         .then(res => {
            if(res.code === 200){
+               window.location = "/album"
             ToastsStore.success("success", 3000, "toast-box-pink")
            } else {
             ToastsStore.error("failed", 3000, "toast-box-pink")
            }
         }).catch(err => {
-            ToastsStore.error("failed", 3000, "toast-box-pink")
-        })
+            ToastsStore.error("Failed to upload try again", 3000, "toast-box-pink")
+          })
     }
 
 
@@ -122,9 +127,14 @@ class MusicUpload extends React.Component {
         fetch(url)
         .then(res => res.json())
         .then(res => {
-            this.setState({
-                artists: res
-            })
+            for(let i of res){
+                if(i.user_id === parseInt(localStorage.getItem("login_id"))){
+                    this.setState({
+                        artist_id: i.id
+                    })
+                    return
+                }
+            }
         }).catch(err => {
             this.setState({
                 artists: []
@@ -145,24 +155,14 @@ class MusicUpload extends React.Component {
                         <input className="text" id="firstname" type="text" onChange={(e) => this.setState({title: e.target.value})} placeholder="Music title" required />
                         <br/>
                         <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                            <input style={{ display:'none' }} type="file" onChange={this.uploadThumbnail} />
+                            <input style={{ display:'none' }} type="file" onChange={this.uploadThumbnail} accept="image/*" />
                             Music thumbnail
                         </label>
                         <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                            <input style={{ display:'none' }} type="file" onChange={this.uploadAudio} />
+                            <input style={{ display:'none' }} type="file" onChange={this.uploadAudio} accept="audio/*" />
                             Audio file
                         </label>
 
-                        <select onChange={(e) => this.setState({artist_id: e.target.value})} style={{ width:'93%', padding:'10px', background:'none', color:'gray', marginTop:'10px' }}>
-                               
-                        <option >Choose artists</option>
-
-                                {
-                                    this.state.artists.map((artist, index) => (
-                                    <option key={index} value={artist.id}>{artist.name}</option>
-                                    ))
-                                }   
-                        </select>
 
                         <div className="row">
                             <div className="col-sm-6">

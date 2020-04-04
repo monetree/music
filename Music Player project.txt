@@ -1,0 +1,30 @@
+1. Add facebook and instagram links.  -------------> done
+
+2. Logging in with any password. -------------> done
+
+3. When I log in, my name should be displayed in the inside -------------> done
+
+4. Unfollow button to remove the atist from my list -------------> done
+
+5. Solve the choose artist problem. Remove it. The artist that is uploading the song will be the artist of the song. -------------> done
+
+6. Image inserting on thumbnail. Handle the exception  -------------> done
+
+7. Error on uploading song when cancel is pressed.   -------------> done
+
+8. Reset all the forms once the okay is pressed.    -------------> done
+
+9. Remove the Upload Artist. Artist will be the same person who is uploading the song so there is no need 
+    to upload the artist again and again.   -------------> done
+
+10. Redirect to playlist once it is created.      -------------> done
+
+11. When I add the songs to playlist, it should ask which playlist to add on.   -------------> done
+
+12. When I play the songs from the playlist, the entire queue should be played.
+
+13. A play option on the playlist to play all the songs in it one after the other.
+
+14. Pause and play. The song should not start from the start. 
+
+12. Recommended songs, playing only the first one.

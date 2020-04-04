@@ -58,6 +58,7 @@ class PlaylistUpload extends React.Component {
         .then(res => res.json())
         .then(res => {
            if(res.code === 200){
+            window.location = "/album"
             ToastsStore.success("success", 3000, "toast-box-pink")
            } else {
             ToastsStore.error("failed", 3000, "toast-box-pink")
@@ -80,7 +81,7 @@ class PlaylistUpload extends React.Component {
                         <input className="text" id="firstname" type="text" onChange={(e) => this.setState({name: e.target.value})} placeholder="playlist title" required />
                         <br/>
                         <label style={{ width:'88%' }} className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                            <input style={{ display:'none' }} type="file" onChange={this.uploadThumbnail} />
+                            <input style={{ display:'none' }} type="file" onChange={this.uploadThumbnail} accept="image/*" />
                             Playlist thumbnail
                         </label>
                       

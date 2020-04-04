@@ -41,14 +41,15 @@ class MainHeader extends React.Component {
     }
 
     render(){
+        const {artist_profile_created} = this.props;
         return (
             <div>
                 <header className="header" style={{ position:'fixed' }}>
                     <FirstHeader ref={this.firstheader}/>
                     {
                         this.state.secondheader ?
-                        (
-                            <SecondHeader />
+                        ( 
+                            <SecondHeader  artist_profile_created={artist_profile_created} />
                         ):(
                             ''
                         )

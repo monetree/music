@@ -5,7 +5,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
     return res.status(400).json('incorrect form submission');
   }
   db.select('username', 'id').from('login')
-    .where('username', '=', username, 'password', '=', password)
+    .where({username: username, password: password})
     .then(data => {
       return res.json(data)
     })

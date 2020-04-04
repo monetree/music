@@ -57,13 +57,13 @@ class SecondHeader extends React.Component {
 
     render(){
       const { path } = this.state;
+      const { artist_profile_created } = this.props;
         return (
             <div className={path === "/album" || path === "/profile" ? "header-inner no-blur-blue" : "header-inner"}>
             <div className="tim-container clearfix">
               <div id="site-logo" className="float-left">
                 <Link to="/">
                 
-                  {/* <h4 style={{ color:'#fff', margin:'auto',marginTop:'1cm', fontFamily:'Callibri', fontSize:'60px'}}>Music Hub</h4> */}
                   <h4 style={{color:'#ffff', marginTop:'0.6cm', fontSize:'60px'}} data-animate="fadeInUp" data-delay="0.5s" >
                     
                     Music Hub
@@ -82,20 +82,25 @@ class SecondHeader extends React.Component {
                     <ul id="main-header-menu">
                    
                       <li> 
-                        <Link to="/music-upload">
-                      <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                          Upload music
-                      </label>
-                      </Link>
+                        {
+                          artist_profile_created ?
+                          (
+                            <Link to="/music-upload">
+                            <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                                Upload music
+                            </label>
+                            </Link>
+                          ):(
+                            <Link to="/artist-upload">
+                            <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                                Create Profile
+                            </label>
+                            </Link>
+                          )
+                        }
+
                     </li>
 
-                    <li> 
-                        <Link to="/artist-upload">
-                      <label className="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
-                          Upload artist
-                      </label>
-                      </Link>
-                    </li>
 
                     <li> 
                         <Link to="/playlist-upload">

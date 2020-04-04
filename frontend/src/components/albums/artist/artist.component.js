@@ -57,6 +57,24 @@ class Artist extends React.Component {
     })
   }
 
+  unfollowArtist = (artist_id) => {
+    let url = FormatUrl(`/followedartists?artist_id=${artist_id}`)
+    fetch(url, {
+        method: 'delete'
+    })
+    .then(res => res.json())
+    .then(res => {
+       if(res.code === 200){
+         this.componentDidMount()
+        ToastsStore.success("success", 3000, "toast-box-pink")
+       } else {
+        ToastsStore.error("failed", 3000, "toast-box-pink")
+       }
+    }).catch(err => {
+        ToastsStore.error("failed", 3000, "toast-box-pink")
+    })
+  }
+
   followedArtist = () => {
     let user_id = localStorage.getItem("login_id")
     let url = FormatUrl('/followedartists')
@@ -126,7 +144,7 @@ class Artist extends React.Component {
                         
                     <h5 className="artist-name">{artist.name}</h5>
                           <Link to={`/songs?id=${artist.id}&name=artist`} className="tim-btn tim-btn-bgt pointer">Songs</Link><br/>
-                          <a onClick={artist.follwed ? "" : () => this.followArtist(artist.id)} className={artist.follwed ? "tim-btn tim-btn-bgt active-background" : "tim-btn tim-btn-bgt pointer" }>{artist.follwed ? "Followed" : "Follow"}</a>
+                          <a onClick={artist.follwed ? () => this.unfollowArtist(artist.id) : () => this.followArtist(artist.id)} className={artist.follwed ? "tim-btn tim-btn-bgt active-background pointer" : "tim-btn tim-btn-bgt pointer" }>{artist.follwed ? "Unfollow" : "Follow"}</a>
                         </div>
                       </div>
                     </li>

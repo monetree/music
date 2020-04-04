@@ -31,20 +31,6 @@ class Profile extends React.Component {
             <div id="site">
             <MainHeader />
                 <div className="container" style={{ marginTop:'1cm' }}>
-                {/* <div className="row">
-                    <div className="col-sm-4">
-                        <ListedSongs title="Your Liked Songs" />
-                    </div>
-                    <div className="col-sm-4">
-                        <ListedSongs title="Uploaded Contents" />
-                    </div>
-                    <div className="col-sm-4">
-                        <br/><br/><br/><br/><br/>
-                    <h5 className="component-title-color">Upload Album</h5>
-                    <h5 className="component-title-color">Help</h5>
-                    <h5 className="component-title-color">Contact Customer Support</h5>
-                    </div>
-                </div> */}
 
                 <br/>
                 <div className="row">
