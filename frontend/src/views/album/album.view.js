@@ -47,6 +47,10 @@ class Album extends React.Component {
       })
   }
 
+    playPLaylist = (playlist_id) => {
+      this.player.current.playPLaylist(playlist_id)
+    }
+
 
     render(){
       const {artist_profile_created} = this.state;
@@ -54,7 +58,7 @@ class Album extends React.Component {
           <div id="site">
             <MainHeader artist_profile_created={artist_profile_created} />
             <br/><br/><br/><br/>
-            <Albums playSong={this.playSong} />
+            <Albums playSong={this.playSong} playPLaylist={this.playPLaylist} />
             <Player ref={this.player} />
           </div> 
         )

@@ -53,6 +53,10 @@ class Genre extends React.Component {
       })
     }
 
+    playPLaylist = (playlist_id) => {
+      this.props.playPLaylist(playlist_id)
+    }
+
 
     getMyPlayList = () => {
       let user_id = localStorage.getItem("login_id")
@@ -67,7 +71,6 @@ class Genre extends React.Component {
             myplaylists.push(i)
           }
         }
-
 
         let new_playlist = []
 
@@ -97,10 +100,6 @@ class Genre extends React.Component {
             playlists: playlists
           })
         }
-
-
-
-
       }).catch(err => {
         console.log(err)
       })
@@ -124,7 +123,8 @@ class Genre extends React.Component {
                         <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
           
                         <h5 className="artist-name">{playlist.name}</h5>
-                        <Link to={`/songs?id=${playlist.id}&name=playlist`} className="tim-btn tim-btn-bgt pointer">Songs</Link><br/>
+                        <a onClick={() => this.playPLaylist(playlist.id)} style={{ marginRight:'10px' }} className="tim-btn tim-btn-bgt pointer">Play all</a>
+                        <Link to={`/songs?id=${playlist.id}&name=playlist`} className="tim-btn tim-btn-bgt pointer">Songs</Link>
                         <a className={playlist.saved ? "tim-btn tim-btn-bgt active-background" : "tim-btn tim-btn-bgt pointer" } onClick={playlist.saved  ? "" :() => this.uploadPLaylist(playlist.id)}>{playlist.saved ? "Saved" : "Save"}</a>
                       </div>
                     </div>

@@ -20,7 +20,7 @@ class Albums extends React.Component {
             <div className="col-sm-12">
               <section id="album">
                 <Artist />
-                <Genre />
+                <Genre playPLaylist={this.props.playPLaylist}/>
                 <Songs playSong={this.props.playSong}/>
               </section>  
                 

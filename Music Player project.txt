@@ -21,10 +21,10 @@
 
 11. When I add the songs to playlist, it should ask which playlist to add on.   -------------> done
 
-12. When I play the songs from the playlist, the entire queue should be played.
+12. When I play the songs from the playlist, the entire queue should be played.  -------------> done
+ 
+13. A play option on the playlist to play all the songs in it one after the other.  -------------> done
 
-13. A play option on the playlist to play all the songs in it one after the other.
+14. Pause and play. The song should not start from the start.   -------------> done
 
-14. Pause and play. The song should not start from the start. 
-
-12. Recommended songs, playing only the first one.
+12. Recommended songs, playing only the first one.    -------------> done
