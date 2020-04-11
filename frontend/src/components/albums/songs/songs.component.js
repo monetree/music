@@ -31,12 +31,18 @@ class Songs extends React.Component {
       fetch(url)
       .then(res => res.json())
       .then(res => {
+        let login_id = localStorage.getItem("login_id")
+        let mylist = []
+        for(let i of res){
+          if(i.user_id === parseInt(login_id)){
+            mylist.push(i)
+          }
+        }
         this.setState({
-          playlists: res
+          playlists: mylist
         })
       })
     }
-
 
     addToPlaylist = (music_id, playlist_id) => {
       let url = FormatUrl(`/playlistlist`)
@@ -89,7 +95,6 @@ class Songs extends React.Component {
           ToastsStore.error("failed", 3000, "toast-box-pink")
       })
     }
-
 
     getLikes = () => {
       let url = FormatUrl(`/like`)
@@ -164,9 +169,6 @@ class Songs extends React.Component {
       this.props.playSong(music)
     }
 
-
-
-
     render(){
         return (
             <div className="tim-container d-flex justify-content-center">
@@ -192,13 +194,11 @@ class Songs extends React.Component {
                       <div className="album-info">
                         <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
                         <h4 className="album-title">{song.title}</h4>
-                        {/* <h5 className="artist-name">Song Artist Name</h5> */}
-                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.playSong(song)}>Play Now</span>
-                        <br/>
-
+                        <span href="#" className="tim-btn tim-btn-bgt pointer" style={{ padding:'5px 15px' }} onClick={() => this.playSong(song)}>Play Now</span>
+                      
                         <Popup
                             trigger={
-                              <span href="#" className="tim-btn tim-btn-bgt pointer">to playlist</span>
+                              <span href="#" className="tim-btn tim-btn-bgt pointer" style={{ padding:'5px 15px' }}>to playlist</span>
                                     }
                             closeOnDocumentClick
                             modal
@@ -226,6 +226,8 @@ class Songs extends React.Component {
                         )}
 
                         </Popup>
+
+                        <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" style={{ padding:'5px 15px' }} className="tim-btn tim-btn-bgt pointer">Report</a>
 
 
 

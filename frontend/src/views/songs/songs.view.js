@@ -123,8 +123,15 @@ getPlayLists = () => {
   fetch(url)
   .then(res => res.json())
   .then(res => {
+    let login_id = localStorage.getItem("login_id")
+    let mylist = []
+    for(let i of res){
+      if(i.user_id === parseInt(login_id)){
+        mylist.push(i)
+      }
+    }
     this.setState({
-      playlists: res
+      playlists: mylist
     })
   })
 }
@@ -257,12 +264,12 @@ handleSongs = () => {
                         <a className="popup-modal" href="static/media/album/1.jpg"><i className="iconsmind-Magnifi-Glass" /></a>
                         <h4 className="album-title">{song.title}</h4>
                         {/* <h5 className="artist-name">Song Artist Name</h5> */}
-                        <span href="#" className="tim-btn tim-btn-bgt pointer" onClick={() => this.player.current.playSong(song)}>Play Now</span>
+                        <span href="#" className="tim-btn tim-btn-bgt pointer" style={{ padding:'5px 15px' }} onClick={() => this.player.current.playSong(song)}>Play Now</span>
                         <br/>
 
                         <Popup
                             trigger={
-                              <span href="#" className="tim-btn tim-btn-bgt pointer">to playlist</span>
+                              <span href="#" className="tim-btn tim-btn-bgt pointer" style={{ padding:'5px 15px' }}>to playlist</span>
                                     }
                             closeOnDocumentClick
                             modal
@@ -290,6 +297,8 @@ handleSongs = () => {
                         )}
 
                         </Popup>
+                        <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" style={{ padding:'5px 15px' }} className="tim-btn tim-btn-bgt pointer">Report</a>
+
 
 
 
